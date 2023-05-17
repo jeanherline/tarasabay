@@ -40,25 +40,48 @@ bullets.forEach((bullet) => {
 
 // modal
 /*=============== SHOW MODAL ===============*/
-const showModal = (openButton, modalContent) =>{
+const showModal = (openButton, modalContent) => {
   const openBtn = document.getElementById(openButton),
-  modalContainer = document.getElementById(modalContent)
-  
-  if(openBtn && modalContainer){
-      openBtn.addEventListener('click', ()=>{
-          modalContainer.classList.add('show-modal')
-      })
+    modalContainer = document.getElementById(modalContent)
+
+  if (openBtn && modalContainer) {
+    openBtn.addEventListener('click', () => {
+      modalContainer.classList.add('show-modal')
+    })
   }
 }
-showModal('open-modal','modal-container')
+showModal('open-modal', 'modal-container')
 
 /*=============== CLOSE MODAL ===============*/
 const closeBtn = document.querySelectorAll('.close-modal')
 
-function closeModal(){
+function closeModal() {
   const modalContainer = document.getElementById('modal-container')
   modalContainer.classList.remove('show-modal')
 }
 closeBtn.forEach(c => c.addEventListener('click', closeModal))
 
 // sign up
+const steps = document.querySelectorAll('.step');
+const nextBtns = document.querySelectorAll('.next-btn');
+const prevBtns = document.querySelectorAll('.prev-btn');
+
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const currentStep = btn.closest('.step');
+    const nextStep = steps[parseInt(currentStep.getAttribute('data-step'))];
+
+    currentStep.style.display = 'none';
+    nextStep.style.display = 'block';
+  });
+});
+
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const currentStep = btn.closest('.step');
+    const prevStep = steps[parseInt(currentStep.getAttribute('data-step')) - 2];
+
+    currentStep.style.display = 'none';
+    prevStep.style.display = 'block';
+  });
+});
